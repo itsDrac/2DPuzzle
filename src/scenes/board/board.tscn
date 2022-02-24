@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctrho07b4mjsx"]
+
+[ext_resource type="Script" path="res://src/scenes/board/board.gd" id="1_nnpyl"]
+[ext_resource type="PackedScene" uid="uid://18devy80tsmx" path="res://src/scenes/tiles/tile.tscn" id="2_ev5ba"]
+
+[node name="board" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -300.0
+script = ExtResource( "1_nnpyl" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+tile_scene = ExtResource( "2_ev5ba" )
+
+[node name="Reset_time" type="Timer" parent="."]
+wait_time = 300.0
+
+[connection signal="timeout" from="Reset_time" to="." method="_on_reset_time_timeout"]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://18devy80tsmx"]
+
+[ext_resource type="Script" path="res://src/scenes/tiles/Tile.gd" id="1_vyr86"]
+[ext_resource type="Texture2D" uid="uid://hl2xpqrcxkmo" path="res://assests/background/bg1.png" id="2_ebi7o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynl5l"]
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+
+[node name="Tile" type="TextureButton" groups=["tile"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( "1_vyr86" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(50, 50)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource( "2_ebi7o" )
+hframes = 5
+vframes = 5
+
+[node name="Number" type="Control" parent="."]
+visible = false
+offset_right = 100.0
+offset_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Number"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(1, 1, 1, 0.0784314)
+
+[node name="Label" type="Label" parent="Number"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Border" type="Panel" parent="."]
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource( "StyleBoxFlat_ynl5l" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
