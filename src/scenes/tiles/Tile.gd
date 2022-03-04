@@ -2,16 +2,26 @@ extends TextureButton
 
 var number
 
-signal tile_pressed
+signal primary_tile
+signal secondary_tile
 signal slide_completed
 
-@onready var sprite = $Sprite2D
+@onready var sprite: Sprite2D= $Sprite2D
+@onready var border: Panel = $Border
 
 func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.pressed:
 		if sprite.get_rect().has_point(sprite.to_local(event.position)):
-			print("A click!", sprite.frame)
+			if event.button_index == MOUSE_BUTTON_LEFT:
+				emit_signal("primary_tile", self)
+			elif event.button_index == MOUSE_BUTTON_RIGHT:
+				emit_signal("secondary_tile", self)
+		
 
+func change_border_color(color = Color.WHITE):
+	var sbox: StyleBoxFlat = border.get_theme_stylebox("panel").duplicate()
+	sbox.border_color = color
+	border.add_theme_stylebox_override("panel",sbox)
 
 # Update the number of the tile
 func set_text(new_number):
@@ -53,10 +63,6 @@ func slide_to(new_position, duration):
 # Hide / Show the number of the tile
 func set_number_visible(state):
 	$Number.visible = state
-
-# Tile is pressed
-func _on_Tile_pressed():
-	emit_signal("tile_pressed", number)
 
 # Tile has finished sliding
 func _on_Tween_tween_completed(_object, _key):
