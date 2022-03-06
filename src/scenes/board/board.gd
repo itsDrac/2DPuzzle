@@ -1,14 +1,17 @@
 extends Control
 
 @export var tile_scene: PackedScene
-@export_range(3,8) var grid_size: int = 5
+@export var grid_size: int = 5
 
-@onready var reset_timer: Timer = $Reset_time 
+@onready var reset_timer: Timer = $Reset_time
+@onready var base: Control = $base  
+
 
 var img_size = 500/grid_size
 var frames = range(grid_size * grid_size)
 var board = []
 var selected_tile = null
+signal solved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,11 +29,13 @@ func _ready():
 			
 		
 	await get_tree().create_timer(3).timeout
+	base.menu.pressed.connect(game_pause)
+	base.timer_on = true
 	frames.shuffle()
 	print(frames)
 	shuffle_board(frames)
 	reset_timer.start()
-
+	
 
 func shuffle_board(frames):
 	var frame = 0
@@ -47,6 +52,7 @@ func check_win():
 	
 	print(f)
 	print(f == range(grid_size * grid_size))
+	emit_signal("solved")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -64,7 +70,6 @@ func primary_tile(tile: TextureButton):
 func secondary_tile(tile: TextureButton):
 	if selected_tile :
 		if abs(board.find(selected_tile) - board.find(tile)) == 5 or abs(board.find(selected_tile) - board.find(tile)) == 1:
-			print("Clicked on vertical neighbor")
 			var temp
 			temp = selected_tile.sprite.frame
 			selected_tile.sprite.frame = tile.sprite.frame
@@ -72,3 +77,10 @@ func secondary_tile(tile: TextureButton):
 			check_win()
 		selected_tile.change_border_color(Color.WHITE)
 	selected_tile = null
+
+
+
+func game_pause():
+	print("pause from board")
+	base.timer_on = false
+	reset_timer.paused = not reset_timer.paused

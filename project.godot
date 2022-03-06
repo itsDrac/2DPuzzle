@@ -17,4 +17,4 @@ config/features=PackedStringArray("4.0", "Vulkan Clustered")
 [display]
 
 window/size/viewport_width=500
-window/size/viewport_height=800
+window/size/viewport_height=700
