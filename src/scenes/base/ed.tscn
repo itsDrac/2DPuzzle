@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmscko24soo38"]
+
+[ext_resource type="Script" path="res://src/scenes/base/ed.gd" id="1_x8dee"]
+
+[node name="ED" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( "1_x8dee" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 199.875
+offset_bottom = -300.125
+color = Color(0.407843, 0.184314, 0.588235, 0.564706)
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ColorRect"]
+anchor_top = 0.429
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -35.8
+offset_bottom = -2.00002
+theme_override_font_sizes/font_size = 32
+text = "You want some therepy bro"
+horizontal_alignment = 1
+vertical_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="ColorRect"]
+anchor_left = 0.4
+anchor_top = 0.554
+anchor_right = 0.624
+anchor_bottom = 0.631
+offset_top = 27.2
+offset_bottom = 58.8
+theme_override_font_sizes/font_size = 28
+text = "YES!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]

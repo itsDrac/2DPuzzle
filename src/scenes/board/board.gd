@@ -6,7 +6,7 @@ extends Control
 @onready var reset_timer: Timer = $Reset_time
 @onready var base: Control = $base  
 
-
+var ed = preload("res://src/scenes/base/ed.tscn")
 var img_size = 500/grid_size
 var frames = range(grid_size * grid_size)
 var board = []
@@ -31,6 +31,7 @@ func _ready():
 	await get_tree().create_timer(3).timeout
 	base.menu.pressed.connect(game_pause)
 	base.timer_on = true
+	base.difficulty.item_selected.connect(difficulty_change)
 	frames.shuffle()
 	print(frames)
 	shuffle_board(frames)
@@ -63,6 +64,11 @@ func _on_reset_time_timeout():
 	shuffle_board(frames)
 
 func primary_tile(tile: TextureButton):
+	if base.difficulty.selected == 2:
+#		var e = ed.instantiate()
+#		add_child(e)
+#		move_child(e,0)
+		print("you have selected ED")
 	selected_tile.change_border_color(Color.WHITE) if selected_tile else null
 	tile.change_border_color(Color.BROWN)
 	selected_tile = tile
@@ -81,6 +87,25 @@ func secondary_tile(tile: TextureButton):
 
 
 func game_pause():
-	print("pause from board")
-	base.timer_on = false
+	base.timer_on = not base.timer_on
 	reset_timer.paused = not reset_timer.paused
+
+func difficulty_change(i: int):
+	base.difficulty.selected = i
+	print(i)
+	if i == 0:
+		reset_timer.wait_time = 500 
+	
+	elif i == 1:
+		reset_timer.wait_time = 200
+	
+	elif i == 2:
+		var e = ed.instantiate()
+#		e.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child(e)
+		
+#		move_child(e,1)
+	reset_timer.stop()
+	shuffle_board(frames)
+	reset_timer.start()

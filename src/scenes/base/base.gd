@@ -1,14 +1,18 @@
 extends Control
 
-var timer_on = true
+var timer_on = false
 var time = 0
 
 @onready var watch = $watch
 @onready var menu = $menu
+@onready var difficulty: OptionButton = $difficultybtn
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	difficulty.add_item("Normal",1)
+	difficulty.add_item("Hard",2)
+	difficulty.add_item("Won",3)
+	difficulty.selected = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -21,8 +25,3 @@ func _process(delta):
 	var time_passed = "Time > %2d : %2d" % [mins, secs]
 	watch.set_text(time_passed)
 
-
-
-func _on_menu_pressed():
-	timer_on = not timer_on
-	print("menu button clicked")

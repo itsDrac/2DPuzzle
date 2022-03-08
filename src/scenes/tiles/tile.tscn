@@ -13,8 +13,9 @@ border_color = Color(1, 1, 1, 1)
 border_blend = true
 
 [node name="Tile" type="TextureButton" groups=["tile"]]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.202
+anchor_bottom = 0.146
+offset_bottom = -0.200012
 script = ExtResource( "1_vyr86" )
 __meta__ = {
 "_edit_use_anchors_": false

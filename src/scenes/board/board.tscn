@@ -7,6 +7,7 @@
 [node name="board" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 script = ExtResource( "1_nnpyl" )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -23,5 +24,3 @@ offset_top = 0.199982
 offset_bottom = 0.0
 
 [connection signal="timeout" from="Reset_time" to="." method="_on_reset_time_timeout"]
-
-[editable path="base"]
