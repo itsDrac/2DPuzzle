@@ -6,6 +6,7 @@ extends Control
 var text = ["You solved the puzzle"]
 
 func _ready():
+
 	text.shuffle()
 	label.text = text[0]
 	print("text added")

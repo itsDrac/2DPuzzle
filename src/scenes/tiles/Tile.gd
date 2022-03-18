@@ -67,3 +67,9 @@ func set_number_visible(state):
 # Tile has finished sliding
 func _on_Tween_tween_completed(_object, _key):
 	emit_signal("slide_completed", number)
+
+func _pressed():
+	print("line 72")
+
+func _on_tile_pressed():
+	print("Tile presed with -->", is_pressed()) # Replace with function body.

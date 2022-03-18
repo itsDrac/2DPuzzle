@@ -84,7 +84,10 @@ func secondary_tile(tile: TextureButton):
 		selected_tile.change_border_color(Color.WHITE)
 	selected_tile = null
 
-
+func change_clickable():
+	for c in board:
+		if c.is_in_group("tile"):
+			c.disabled = not c.disabled
 
 func game_pause():
 	base.timer_on = not base.timer_on
@@ -102,10 +105,10 @@ func difficulty_change(i: int):
 	elif i == 2:
 		var e = ed.instantiate()
 #		e.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		mouse_filter = Control.MOUSE_FILTER_IGNORE
+		mouse_filter = Control.MOUSE_FILTER_STOP
 		add_child(e)
-		
-#		move_child(e,1)
+		change_clickable()
+#		move_child(e,0)
 	reset_timer.stop()
 	shuffle_board(frames)
 	reset_timer.start()
